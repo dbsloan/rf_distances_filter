@@ -1,0 +1,8 @@
+November 24, 2016
+
+There was a bug in the original version of the "twoFiles" python script. Anytime a pair of trees differs in taxon sampling, the script must prune them to their shared taxa to calculate RF distances. But it was permanently modifying trees when it did this, so when it compared the same tree against a set of others, that tree would quickly be pruned down to almost nothing (assuming taxon sampling was often incomplete), resulting in low numbers of taxa and low RF distances for later comparisons.
+
+This was corrected by using the copy.deepcopy function so that pruning only affected the current pairwise comparison.
+
+The modified version is RFdistances.twoFiles.v2.py
+
